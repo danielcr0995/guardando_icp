@@ -4,6 +4,7 @@ import Footer from "./Footer.jsx";
 import Note from "./Note"
 // import notes from "../notes"
 import CreateArea from "./CreateArea"
+import { dguardando } from "../../../declarations/dguardando"
 
 function App(){
     // console.log(notesList)
@@ -13,6 +14,7 @@ function App(){
     function addNote(noteNew){        
         // console.log(note);
         setNotes(prevNotes=> {
+            dguardando.createNote( noteNew.title, noteNew.content)
             return (
                 [...prevNotes, noteNew]
             )
