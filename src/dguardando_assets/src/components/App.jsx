@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import Note from "./Note"
@@ -13,18 +13,28 @@ function App(){
 
     function addNote(noteNew){        
         // console.log(note);
+        dguardando.createNote( noteNew.title, noteNew.content);
+
         setNotes(prevNotes=> {
-            dguardando.createNote( noteNew.title, noteNew.content)
             return (
-                [...prevNotes, noteNew]
-            )
-            
+                [noteNew, ...prevNotes]
+            )            
         })
         // console.log(notesList);
+    }
 
+    useEffect(()=>{
+        // console.log("triggered");
+        fetchData();
+    },[])
+
+    async function fetchData(){
+        const notesArray = await dguardando.readNotes();
+        setNotes(notesArray);
     }
 
     function deleteNote(id){
+        dguardando.deleteNote(id);
         setNotes(prevNotes =>{
             return (prevNotes.filter((note,index)=>{
                 return index!==id
