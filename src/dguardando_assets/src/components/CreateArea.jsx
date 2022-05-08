@@ -44,7 +44,7 @@ function CreateArea(props) {
       <form className="create-note">
         {writing && <input onChange={changeText} value={note.title} name="title" placeholder="Title" />}
         <textarea onClick={handleWriting} onChange={changeText} value={note.content} name="content" placeholder="Take a note..." rows={writing? 3:1} />
-        <button onClick={submitNote}>Add</button>
+       {writing && <button onClick={submitNote}>Add</button>}
       </form>
     </div>
   );
